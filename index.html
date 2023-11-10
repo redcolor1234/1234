@@ -1,31 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Alarm Alert Example</title>
+    <title>Your Website</title>
 </head>
 <body>
-  <h1>זה האתר הראשון שלי!!!</h1>
+    <h1>Your Website</h1>
 
-  <script>
-    // Function to check the alarm status
-    function checkAlarm() {
-      // Send a request to the frontline command link
-      fetch('https://www.tzevaadom.co.il/livestream/no-ui?maxItems=100&transparent=true')
-        .then(response => response.json())
-        .then(data => {
-          // Check if the alarm is active
-          if (data.alarm === 'active') {
-            // Display an alert on the screen
-            alert('Alarm is active!');
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-    }
+    <iframe src="https://www.tzevaadom.co.il/livestream/no-ui?maxItems=100&transparent=true" width="100%" height="500px"></iframe>
 
-    // Call the checkAlarm function every 5 seconds
-    setInterval(checkAlarm, 5000);
-  </script>
+    <p>Other content on your website.</p>
 </body>
 </html>
