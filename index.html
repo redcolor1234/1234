@@ -1,13 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Your Website</title>
+<title>Your Website</title>
+<style>
+    body {
+        background-color: white;
+    }
+    .notification {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        border: 1px solid black;
+        background-color: lightgray;
+        font-family: Arial, sans-serif;
+        font-size: 18px;
+    }
+</style>
 </head>
 <body>
-    <h1>Your Website</h1>
+<div class="notification" id="notification" style="display: none;"></div>
+<script>
+    function showNotification(message) {
+        var notificationElement = document.getElementById("notification");
+        notificationElement.innerHTML = message;
+        notificationElement.style.display = "block";
+        setTimeout(function() {
+            notificationElement.style.display = "none";
+        }, 5000); // Hide the notification after 5 seconds
+    }
 
-    <iframe src="https://www.tzevaadom.co.il/livestream/no-ui?maxItems=100&transparent=true" width="100%" height="500px"></iframe>
+    function fetchNotification() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://www.tzevaadom.co.il/livestream/no-ui?maxItems=100&transparent=true", true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                var message = response.message;
+                if (message) {
+                    showNotification(message);
+                }
+            }
+        };
+        xhr.send();
+    }
 
-    <p>Other content on your website.</p>
+    // Fetch the notification initially
+    fetchNotification();
+
+    // Fetch the notification every 1 seconds
+    setInterval(fetchNotification, 1000);
+</script>
 </body>
 </html>
